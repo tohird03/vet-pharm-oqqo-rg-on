@@ -116,10 +116,10 @@ export enum Endpoints {
 
 const config: Record<string, TStage> = {
   dev: {
-    apiUrl: '173-212-241-67.oqqurgon-vet-pharm.nip.io',
+    apiUrl: 'https://173-212-241-67.oqqurgon-vet-pharm.nip.io',
   },
   prod: {
-    apiUrl: '173-212-241-67.oqqurgon-vet-pharm.nip.io',
+    apiUrl: 'https://173-212-241-67.oqqurgon-vet-pharm.nip.io',
   },
 };
 
