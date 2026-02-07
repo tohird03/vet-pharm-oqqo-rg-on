@@ -1,0 +1,36 @@
+.total__order {
+  background-color: #BFF5C0;
+}
+
+.total__arrival {
+  background-color: #BEE6FF;
+}
+
+.total__returning {
+  background-color: #FFBDBD;
+}
+
+.total {
+  background-color: bisque;
+}
+
+.product-story__count {
+  background-color: rgba(212, 212, 212, 0.821);
+  text-align: center;
+  font-weight: bold;
+}
+
+.single-product__name {
+  margin: 0 !important;
+}
+
+.single-product__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  @media (max-width: 1600px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
