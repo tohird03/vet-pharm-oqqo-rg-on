@@ -79,6 +79,18 @@ export const AddEditModal = observer(() => {
           />
         </Form.Item>
         <Form.Item
+          label="Narxning eng past foiz ustamasi"
+          name="minPercent"
+          initialValue={0}
+        >
+          <InputNumber
+            placeholder="Narx ustiga qo'yiladigan foiz"
+            defaultValue={0}
+            style={{ width: '100%' }}
+            formatter={(value) => priceFormat(value!)}
+          />
+        </Form.Item>
+        <Form.Item
           label="Narx ustiga qo'yiladigan foiz"
           name="percent"
           initialValue={0}

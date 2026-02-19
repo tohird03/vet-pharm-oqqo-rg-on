@@ -76,6 +76,9 @@ export enum Endpoints {
   CategoryMany = '/client-category/many',
   CategoryOne = '/client-category/one',
 
+  ExpensesMany = '/expense/many',
+  ExpensesOne = '/expense/one',
+
   //XATO
   RefreshToken = '/dashboard-auth/refresh',
 
@@ -112,6 +115,8 @@ export enum Endpoints {
   // RETURNED ORDER
   returnedOrder = '/returned-order',
   returnedProduct = '/returned-product',
+
+
 }
 
 const config: Record<string, TStage> = {

@@ -1,10 +1,6 @@
 import React from 'react';
 import {ColumnType} from 'antd/es/table';
 import {Action} from './Action';
-import { priceFormat } from '@/utils/priceFormat';
-import { IClientsPayments } from '@/api/payment/types';
-import { getFullDateFormat } from '@/utils/getDateFormat';
-import { ClientNameLink } from '@/pages/ActionComponents/ClientNameLink';
 import { ICategory } from '@/api/category/types';
 
 export const categoriesColumns: ColumnType<ICategory>[] = [
@@ -21,6 +17,13 @@ export const categoriesColumns: ColumnType<ICategory>[] = [
     title: 'Kategoriya nomi',
     align: 'center',
     render: (value, record) => record?.name,
+  },
+  {
+    key: 'minPercent',
+    dataIndex: 'minPercent',
+    title: 'Narxning eng past foiz ustamasi',
+    align: 'center',
+    render: (value, record) => <span>{record?.minPercent}%</span>,
   },
   {
     key: 'percent',

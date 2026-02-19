@@ -53,6 +53,7 @@ export const AddEditModal = observer(() => {
   const changeCostRef = useRef<any>(null);
   const changeCountRef = useRef<any>(null);
   const [selectedClient, setSelectedClient] = useState<IClientsInfo | null>(null);
+  const [minPrice, setMinPrice] = useState<number>(0);
 
   // GET DATAS
   const { data: clientsData, isLoading: loadingClients } = useQuery({
@@ -252,7 +253,11 @@ export const AddEditModal = observer(() => {
       return;
     }
 
-    form.setFieldValue('price', (1 + (selectedClient?.category?.percent / 100)) * findProduct?.price!);
+    const price = (1 + (selectedClient?.category?.percent / 100)) * findProduct?.price!;
+    const minPriceValue = (1 + (selectedClient?.category?.percent / 100)) * findProduct?.price!;
+
+    setMinPrice(minPriceValue);
+    form.setFieldValue('price', price);
 
     setIsOpenProductSelect(false);
     countInputRef.current?.focus();
@@ -658,7 +663,7 @@ export const AddEditModal = observer(() => {
             style={{ flex: 1, width: '100%' }}
             help={
               selectedClient
-                ? `${selectedClient?.category?.name}` : ''}
+                ? `${selectedClient?.category?.name} - ${selectedClient?.category?.percent}%` : ''}
           >
             <Select
               showSearch
@@ -752,7 +757,22 @@ export const AddEditModal = observer(() => {
         </div>
         <Form.Item
           label="Narxi"
-          rules={[{ required: true }]}
+          rules={[
+            { required: true },
+            {
+              validator: (_, value) => {
+                console.log(value, minPrice);
+
+                if (value < minPrice) {
+                  return Promise.reject(
+                    new Error(`Minimal narx ${priceFormat(minPrice)} dan kam bo'lishi mumkin emas`)
+                  );
+                }
+
+                return Promise.resolve();
+              },
+            },
+          ]}
           name="price"
           initialValue={0}
           className={cn('form__row')}
