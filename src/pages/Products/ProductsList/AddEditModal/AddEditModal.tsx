@@ -6,8 +6,20 @@ import { addNotification } from '@/utils';
 import { productsListStore } from '@/stores/products';
 import { priceFormat } from '@/utils/priceFormat';
 import { productsApi } from '@/api/product/product';
-import { IAddEditProduct } from '@/api/product/types';
+import { IAddEditProduct, IProductUnit } from '@/api/product/types';
 import { ProductUnitOptions } from '../constants';
+
+type FormTypes = {
+  id?: string;
+  minAmount?: number;
+  name: string;
+  count: number;
+  cost: number;
+  unit: IProductUnit;
+  priceDoctor: number;
+  priceClient: number;
+  priceFermer: number;
+};
 
 export const AddEditModal = observer(() => {
   const [form] = Form.useForm();
@@ -42,12 +54,18 @@ export const AddEditModal = observer(() => {
       },
     });
 
-  const handleSubmit = (values: IAddEditProduct) => {
+  const handleSubmit = (values: FormTypes) => {
     setLoading(true);
 
-    const valueProducts = {
+    const valueProducts: IAddEditProduct = {
       ...values,
       count: 0,
+      price: values?.cost,
+      prices: {
+        doctor: values?.priceDoctor,
+        farmer: values?.priceFermer,
+        client: values?.priceClient,
+      },
     };
 
     if (productsListStore?.singleProduct) {
@@ -74,6 +92,9 @@ export const AddEditModal = observer(() => {
     if (productsListStore.singleProduct) {
       form.setFieldsValue({
         ...productsListStore.singleProduct,
+        priceDoctor: productsListStore?.singleProduct?.prices?.doctor,
+        priceFermer: productsListStore?.singleProduct?.prices?.farmer,
+        priceClient: productsListStore?.singleProduct?.prices?.client,
       });
     }
   }, [productsListStore.singleProduct]);
@@ -105,7 +126,7 @@ export const AddEditModal = observer(() => {
         <Form.Item
           label="Mahsulot birligi"
           name="unit"
-          rules={[{required: true}]}
+          rules={[{ required: true }]}
         >
           <Select
             options={ProductUnitOptions}
@@ -115,7 +136,7 @@ export const AddEditModal = observer(() => {
         <Form.Item
           label="Ogohlantiruvchi qoldiq"
           name="minAmount"
-          rules={[{required: true}]}
+          rules={[{ required: true }]}
         >
           <InputNumber
             placeholder="Ushbu sondan kam qolgan mahsulot haqida sizni ogohlantiramiz!"
@@ -135,9 +156,31 @@ export const AddEditModal = observer(() => {
           />
         </Form.Item>
         <Form.Item
-          label="Sotish narxi"
+          label="Doctorga sotish narxi"
           rules={[{ required: true }]}
-          name="price"
+          name="priceDoctor"
+        >
+          <InputNumber
+            placeholder="Sotish narxi"
+            style={{ width: '100%' }}
+            formatter={(value) => priceFormat(value!)}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Fermerga sotish narxi"
+          rules={[{ required: true }]}
+          name="priceFermer"
+        >
+          <InputNumber
+            placeholder="Sotish narxi"
+            style={{ width: '100%' }}
+            formatter={(value) => priceFormat(value!)}
+          />
+        </Form.Item>
+        <Form.Item
+          label="Mijozga sotish narxi"
+          rules={[{ required: true }]}
+          name="priceClient"
         >
           <InputNumber
             placeholder="Sotish narxi"

@@ -1,5 +1,3 @@
-import { ICategory } from '../category/types';
-import { IOrder } from '../order/types';
 import { IReturnedOrder } from '../returned-order/types';
 import { IPagination, IPayment } from '../types';
 
@@ -15,7 +13,7 @@ export interface IClientsInfo {
     isActive: boolean;
   };
   address: string;
-  category: ICategory;
+  category: IClientType;
 }
 
 export interface IGetSingleClientParams {
@@ -73,6 +71,12 @@ export enum IClientDebtFilter {
   EQUAL = 'eq',
   GREATER = 'gt',
   LESS = 'lt',
+}
+
+export enum IClientType {
+  CLIENT = 'client',
+  FARMER = 'farmer',
+  DOCTOR = 'doctor',
 }
 
 export interface IAddEditClientInfo {

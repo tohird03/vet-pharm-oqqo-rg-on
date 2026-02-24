@@ -8,6 +8,7 @@ import { priceFormat } from '@/utils/priceFormat';
 import { ClientNameLink } from '@/pages/ActionComponents/ClientNameLink';
 import { PaymentStatus } from './PaymentStatus';
 import { ProductUnitName } from '../ProductsList/constants';
+import { IClientType } from '@/api/clients';
 
 export const ordersColumns: ColumnType<IOrder>[] = [
   {
@@ -356,6 +357,12 @@ export const ordersTotalCalc: ColumnType<ITotalOrderPaymentCalc>[] = [
     render: (value, record) => priceFormat(record?.totalDebt),
   },
 ];
+
+export const ICLientTypeText: Record<IClientType, string> = {
+  [IClientType.CLIENT]: 'Mijoz',
+  [IClientType.FARMER]: 'Fermer',
+  [IClientType.DOCTOR]: 'Doktor',
+};
 
 export const FilterOrderStatusOptions = [
   {

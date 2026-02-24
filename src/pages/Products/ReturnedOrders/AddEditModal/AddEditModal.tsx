@@ -21,6 +21,7 @@ import { IAddProductsToReturnedOrder, IAddReturnedOrderProducts, IAddReturnedOrd
 import { returnedOrderApi } from '@/api/returned-order/returned-order';
 import { ProductUnitName } from '../../ProductsList/constants';
 import { IClientsInfo } from '@/api/clients';
+import { ICLientTypeText } from '../../OrdersList/constants';
 
 const cn = classNames.bind(styles);
 
@@ -169,9 +170,7 @@ export const AddEditModal = observer(() => {
       return;
     }
 
-    console.log(selectedClient);
-
-    form.setFieldValue('price', (1 + (selectedClient?.category?.percent / 100)) * findProduct?.price!);
+    form.setFieldValue('price', findProduct?.prices[selectedClient?.category]);
 
     setIsOpenProductSelect(false);
     countInputRef.current?.focus();
@@ -479,7 +478,7 @@ export const AddEditModal = observer(() => {
           name="clientId"
           help={
             selectedClient
-              ? `${selectedClient?.category?.name}` : ''}
+              ? `${ICLientTypeText[selectedClient?.category]}` : ''}
         >
           <Select
             showSearch

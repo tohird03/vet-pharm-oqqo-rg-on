@@ -2,22 +2,16 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {observer} from 'mobx-react';
 import {useMutation, useQueryClient, useQuery} from '@tanstack/react-query';
 import {Form, Input, InputNumber, Modal, Select} from 'antd';
-import {categoryStore, clientsInfoStore} from '@/stores/clients';
+import {clientsInfoStore} from '@/stores/clients';
 import {addNotification} from '@/utils';
 import {regexPhoneNumber} from '@/utils/phoneFormat';
 import { IAddEditClientInfo, IUpdateUser, clientsInfoApi } from '@/api/clients';
+import { clientCategoryOptions } from '../constants';
 
 export const AddEditModal = observer(() => {
   const [form] = Form.useForm();
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
-
-  const { data: categoriesData } = useQuery({
-    queryKey: ['getCategories'],
-    queryFn: () =>
-      categoryStore.getCategories(),
-  });
-
 
   const {mutate: addNewClient} =
     useMutation({
@@ -77,13 +71,6 @@ export const AddEditModal = observer(() => {
     form.submit();
   };
 
-  const categoriesOptions = useMemo(() => (
-    categoriesData?.data?.data.map((supplier) => ({
-      value: supplier?.id,
-      label: `${supplier?.name}: ${supplier?.percent}`,
-    }))
-  ), [categoriesData]);
-
   useEffect(() => {
     if (clientsInfoStore.singleClientInfo) {
       form.setFieldsValue({
@@ -138,12 +125,12 @@ export const AddEditModal = observer(() => {
         <Form.Item
           label="Mijoz kategoriyasi"
           rules={[{ required: true }]}
-          name="categoryId"
+          name="category"
         >
           <Select
             showSearch
             placeholder="Mijoz kategoriyasi"
-            options={categoriesOptions}
+            options={clientCategoryOptions}
             allowClear
           />
         </Form.Item>

@@ -653,6 +653,7 @@ export const AddEditModal = observer(() => {
           initialValue={0}
         >
           <InputNumber
+            disabled
             placeholder="Sotib olingan narxi"
             style={{ width: '100%' }}
             formatter={(value) => priceFormat(value!)}

@@ -5,10 +5,10 @@ import {Loading} from '@/components';
 import {ROUTES} from '@/constants';
 import {Layout} from '@/modules/Layout';
 import {
-  Category,
   ClientsInfo,
   ClientsPayments,
   ClientsStatistic,
+  Expenses,
   IncomeProducts,
   Login,
   Orders,
@@ -73,10 +73,6 @@ export const Router = ({isAuth}: Props) => useRoutes([
             path: ROUTES.clientsPayments,
           },
           {
-            element: <Suspense fallback={<Loading />}><Category /></Suspense>,
-            path: ROUTES.clientsCategory,
-          },
-          {
             element: <Suspense fallback={<Loading />}><ClientsStatistic /></Suspense>,
             path: ROUTES.clientsStatistic,
           },
@@ -113,6 +109,10 @@ export const Router = ({isAuth}: Props) => useRoutes([
           {
             element: <Suspense fallback={<Loading />}><SingleProduct /></Suspense>,
             path: ROUTES.singleProduct,
+          },
+          {
+            element: <Suspense fallback={<Loading />}><Expenses /></Suspense>,
+            path: ROUTES.expenses,
           },
           // SETTING ROUTES
           {

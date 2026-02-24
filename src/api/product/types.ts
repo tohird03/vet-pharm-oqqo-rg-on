@@ -15,23 +15,28 @@ export interface IProducts {
   count: number;
   minAmount: number;
   createdAt: string;
-  // Sotib olingan narx
   cost: number;
-  // Sotuvda sotiladigan narxi
   price: number;
+  prices: IProductPrices;
   lastSellingDate: string;
   unit: IProductUnit;
 }
 
+export interface IProductPrices {
+  client: number;
+  doctor: number;
+  farmer: number;
+}
+
 export interface IAddEditProduct {
   id?: string;
-  min_amount?: number;
-  wholesale_price?: number;
+  minAmount?: number;
   name: string;
   count: number;
   cost: number;
-  selling_price: number;
   unit: IProductUnit;
+  price: number;
+  prices: IProductPrices;
 }
 
 export interface IProductTotalCalc {

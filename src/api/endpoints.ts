@@ -115,8 +115,6 @@ export enum Endpoints {
   // RETURNED ORDER
   returnedOrder = '/returned-order',
   returnedProduct = '/returned-product',
-
-
 }
 
 const config: Record<string, TStage> = {

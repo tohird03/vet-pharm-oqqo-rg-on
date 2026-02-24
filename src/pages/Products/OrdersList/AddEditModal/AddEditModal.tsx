@@ -20,10 +20,10 @@ import {
   IOrderStatus,
 } from '@/api/order/types';
 import Table, { ColumnType } from 'antd/es/table';
-import { OrderStatus, OrderStatusColor } from '../constants';
+import { ICLientTypeText, OrderStatus, OrderStatusColor } from '../constants';
 import { CheckboxChangeEvent } from 'antd/es/checkbox';
 import { useParams } from 'react-router-dom';
-import { IClientsInfo } from '@/api/clients';
+import { IClientType, IClientsInfo } from '@/api/clients';
 import { getFullDateFormat } from '@/utils/getDateFormat';
 import { ProductUnitName } from '../../ProductsList/constants';
 
@@ -253,10 +253,9 @@ export const AddEditModal = observer(() => {
       return;
     }
 
-    const price = (1 + (selectedClient?.category?.percent / 100)) * findProduct?.price!;
-    const minPriceValue = (1 + (selectedClient?.category?.percent / 100)) * findProduct?.price!;
+    const price = findProduct?.prices[selectedClient?.category];
 
-    setMinPrice(minPriceValue);
+    setMinPrice(findProduct?.cost!);
     form.setFieldValue('price', price);
 
     setIsOpenProductSelect(false);
@@ -663,7 +662,7 @@ export const AddEditModal = observer(() => {
             style={{ flex: 1, width: '100%' }}
             help={
               selectedClient
-                ? `${selectedClient?.category?.name} - ${selectedClient?.category?.percent}%` : ''}
+                ? `${ICLientTypeText[selectedClient?.category]}` : ''}
           >
             <Select
               showSearch
@@ -739,7 +738,7 @@ export const AddEditModal = observer(() => {
                     </p>
                     <div className={cn('income-order__add-product-info')}>
                       <p className={cn('income-order__add-product-price')}>
-                        {product?.price}
+                        {product?.prices[selectedClient?.category!] || product?.cost}
                       </p>
                       <p
                         style={{ backgroundColor: `${countColor(product?.count, product?.minAmount)}` }}

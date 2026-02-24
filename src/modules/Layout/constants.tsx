@@ -54,6 +54,11 @@ export const mainMenuList: IMenuItems[] = [
         key: ROUTES.productsReturnedOrder,
         roleKey: EPageAccess.RETURNING,
       },
+      {
+        label: <><FileSyncOutlined /> Harajatlar</>,
+        key: ROUTES.expenses,
+        roleKey: EPageAccess.SELLING,
+      },
     ],
   },
   {
@@ -74,7 +79,7 @@ export const mainMenuList: IMenuItems[] = [
       {
         label: 'Mijozlar kategoriyasi',
         key: ROUTES.clientsCategory,
-        roleKey: EPageAccess.CLIENTPAYMENT,
+        roleKey: EPageAccess.CLIENTCATEGORY,
       },
       {
         label: 'Mijozlar hisoboti',
@@ -118,7 +123,7 @@ export const mainMenuList: IMenuItems[] = [
       {
         label: <><SolutionOutlined />Xodimlarning faollik hisoboti</>,
         key: ROUTES.workersStaffsWorkingTime,
-        roleKey: EPageAccess.STUFFPAYMENT,
+        roleKey: EPageAccess.STAFFACTIVITY,
       },
     ],
   },

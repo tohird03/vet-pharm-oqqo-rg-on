@@ -76,7 +76,7 @@ export const Header = observer(({ collapsed, onCollapsedClick, isMobile }: Props
   useEffect(() => {
     const nowTime = new Date().getHours();
 
-    if (nowTime < 8 || nowTime >= 18) return;
+    if (nowTime < 8 || nowTime >= 19) return;
     if (!activity?.isActive || !startClientSecRef.current) return;
 
     const interval = setInterval(() => {
@@ -106,43 +106,39 @@ export const Header = observer(({ collapsed, onCollapsedClick, isMobile }: Props
             ? <MenuUnfoldOutlined className="header__icon" />
             : <MenuFoldOutlined className="header__icon" />}
         </Button>
-        {!isMobile && authStore.isCloseDay && <span className="layout__logo-text">Vet Pharm</span>}
-        {isMobile &&
-          <span className="layout__logo-text">
-            {authStore.isCloseDay ? 'Kun yopilgan' : 'Vet pharm'}
-          </span>
-        }
-
+        {!isMobile && <span className="layout__logo-text">Vet Pharm</span>}
         <div className="header__profile">
-          {!isMobile && (
-            <>
-              <Typography.Text style={{ color: 'white', fontSize: 16 }}>
-                {formatTime(seconds)}
-              </Typography.Text>
-              <Button
-                type="primary"
-                style={
-                  {
-                    backgroundColor: authStore?.staffInfo?.activity?.isActive ? '#FFA500' : '#16a34a',
-                    borderColor: authStore?.staffInfo?.activity?.isActive ? '#FFA500' : '#16a34a',
-                  }
-                }
-                onClick={handleStartOrStopWorkTime}
-              >
+          <div className="header__timer">
+            <Typography.Text style={{ color: 'white', fontSize: 16 }}>
+              {formatTime(seconds)}
+            </Typography.Text>
+            <Button
+              type="primary"
+              style={
                 {
-                  authStore?.staffInfo?.activity?.isActive
-                    ? 'Ishni to\'xtatish'
-                    : 'Ishni boshlash'
+                  backgroundColor: authStore?.staffInfo?.activity?.isActive ? '#FFA500' : '#16a34a',
+                  borderColor: authStore?.staffInfo?.activity?.isActive ? '#FFA500' : '#16a34a',
                 }
-              </Button>
+              }
+              onClick={handleStartOrStopWorkTime}
+            >
+              {
+                authStore?.staffInfo?.activity?.isActive
+                  ? 'Ishni to\'xtatish'
+                  : 'Ishni boshlash'
+              }
+            </Button>
+          </div>
+          {!isMobile &&
+            <div className="header__name">
               <Typography.Title level={5} style={{ color: 'white', margin: '0' }}>
                 {authStore.staffInfo?.fullname}
               </Typography.Title>
               <Typography.Title level={5} style={{ color: 'white', margin: '0' }}>
                 +{authStore.staffInfo?.phone}
               </Typography.Title>
-            </>
-          )}
+            </div>
+          }
           <Dropdown menu={{ items }} placement="bottomRight">
             <Avatar style={{ backgroundColor: '#1677FF' }} icon={<UserOutlined />} />
           </Dropdown>

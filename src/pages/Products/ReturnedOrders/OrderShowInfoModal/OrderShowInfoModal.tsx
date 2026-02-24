@@ -28,7 +28,7 @@ export const ReturnedOrderShowInfoModal = observer(() => {
   return (
     <Modal
       open={returnedOrdersStore.isOpenShowProductModal}
-      title={'Sotuv'}
+      title={'Qaytaruv'}
       onCancel={handleModalClose}
       cancelText="Bekor qilish"
       centered
@@ -44,11 +44,6 @@ export const ReturnedOrderShowInfoModal = observer(() => {
         </Button>
       }
     >
-      <DataTable
-        columns={returnedOrdersColumns}
-        data={[returnedOrdersStore?.singleReturnedOrder]}
-        pagination={false}
-      />
       <Table
         columns={returnedOrdersInfoProductsColumns}
         dataSource={returnedOrdersStore?.singleReturnedOrder?.products || []}

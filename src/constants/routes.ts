@@ -30,6 +30,7 @@ export const ROUTES = {
   productsOrder: '/products/order',
   productsReturnedOrder: '/products/returned-order',
   singleProduct: '/products/:productId',
+  expenses: '/expenses',
 } as const;
 
 export const roleChecker = {

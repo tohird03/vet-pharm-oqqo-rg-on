@@ -1,6 +1,6 @@
 import React from 'react';
 import { ColumnType } from 'antd/es/table';
-import { IClientDebtFilter, IClientsInfo } from '@/api/clients';
+import { IClientDebtFilter, IClientType, IClientsInfo } from '@/api/clients';
 import { Action } from './Action';
 import { formatPhoneNumber } from '@/utils/phoneFormat';
 import { priceFormat } from '@/utils/priceFormat';
@@ -50,7 +50,7 @@ export const clientsColumns: ColumnType<IClientsInfo>[] = [
     dataIndex: 'category',
     title: 'Mijoz turi',
     align: 'center',
-    render: (value, record) => record?.category?.name,
+    render: (value, record) => record?.category,
   },
   {
     key: 'isActiveBot',
@@ -95,5 +95,20 @@ export const clientDebtFilter = [
   {
     value: IClientDebtFilter.GREATER,
     label: '* dan yuqori bo\'lganlari',
+  },
+];
+
+export const clientCategoryOptions = [
+  {
+    value: IClientType.CLIENT,
+    label: 'Mijoz',
+  },
+  {
+    value: IClientType.DOCTOR,
+    label: 'Doctor',
+  },
+  {
+    value: IClientType.FARMER,
+    label: 'Fermer',
   },
 ];

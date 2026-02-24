@@ -1,4 +1,3 @@
-export * from './Category';
 export * from './ClientsInfo';
 export * from './ClientsStatistic';
 export * from './Payments';
